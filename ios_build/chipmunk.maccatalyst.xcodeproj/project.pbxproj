@@ -1,0 +1,500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18BE51AC273CF58F00B0F170 /* cpDampedRotarySpring.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE518C273CF58E00B0F170 /* cpDampedRotarySpring.c */; };
+		18BE51AD273CF58F00B0F170 /* cpConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE518D273CF58E00B0F170 /* cpConstraint.c */; };
+		18BE51AE273CF58F00B0F170 /* cpSpaceDebug.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE518E273CF58E00B0F170 /* cpSpaceDebug.c */; };
+		18BE51AF273CF58F00B0F170 /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE518F273CF58E00B0F170 /* cpSpaceHash.c */; };
+		18BE51B0273CF58F00B0F170 /* cpShape.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5190273CF58E00B0F170 /* cpShape.c */; };
+		18BE51B1273CF58F00B0F170 /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5191273CF58E00B0F170 /* cpArbiter.c */; };
+		18BE51B2273CF58F00B0F170 /* cpRobust.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5192273CF58E00B0F170 /* cpRobust.c */; };
+		18BE51B3273CF58F00B0F170 /* cpRatchetJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5193273CF58E00B0F170 /* cpRatchetJoint.c */; };
+		18BE51B4273CF58F00B0F170 /* cpPinJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5194273CF58E00B0F170 /* cpPinJoint.c */; };
+		18BE51B5273CF58F00B0F170 /* cpMarch.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5195273CF58E00B0F170 /* cpMarch.c */; };
+		18BE51B6273CF58F00B0F170 /* cpArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5196273CF58E00B0F170 /* cpArray.c */; };
+		18BE51B7273CF58F00B0F170 /* cpGearJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5197273CF58E00B0F170 /* cpGearJoint.c */; };
+		18BE51B8273CF58F00B0F170 /* cpSweep1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5198273CF58E00B0F170 /* cpSweep1D.c */; };
+		18BE51B9273CF58F00B0F170 /* cpCollision.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE5199273CF58E00B0F170 /* cpCollision.c */; };
+		18BE51BA273CF58F00B0F170 /* cpSpaceComponent.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519A273CF58E00B0F170 /* cpSpaceComponent.c */; };
+		18BE51BB273CF58F00B0F170 /* cpSimpleMotor.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519B273CF58E00B0F170 /* cpSimpleMotor.c */; };
+		18BE51BC273CF58F00B0F170 /* cpPolyShape.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519C273CF58E00B0F170 /* cpPolyShape.c */; };
+		18BE51BD273CF58F00B0F170 /* cpBBTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519D273CF58E00B0F170 /* cpBBTree.c */; };
+		18BE51BE273CF58F00B0F170 /* cpSlideJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519E273CF58E00B0F170 /* cpSlideJoint.c */; };
+		18BE51BF273CF58F00B0F170 /* cpDampedSpring.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE519F273CF58E00B0F170 /* cpDampedSpring.c */; };
+		18BE51C0273CF58F00B0F170 /* cpSpatialIndex.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A0273CF58F00B0F170 /* cpSpatialIndex.c */; };
+		18BE51C1273CF58F00B0F170 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A1273CF58F00B0F170 /* chipmunk.c */; };
+		18BE51C2273CF58F00B0F170 /* cpSpaceQuery.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A2273CF58F00B0F170 /* cpSpaceQuery.c */; };
+		18BE51C3273CF58F00B0F170 /* cpBody.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A3273CF58F00B0F170 /* cpBody.c */; };
+		18BE51C4273CF58F00B0F170 /* cpGrooveJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A4273CF58F00B0F170 /* cpGrooveJoint.c */; };
+		18BE51C5273CF58F00B0F170 /* cpHastySpace.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A5273CF58F00B0F170 /* cpHastySpace.c */; };
+		18BE51C6273CF58F00B0F170 /* cpPolyline.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A6273CF58F00B0F170 /* cpPolyline.c */; };
+		18BE51C7273CF58F00B0F170 /* cpPivotJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A7273CF58F00B0F170 /* cpPivotJoint.c */; };
+		18BE51C8273CF58F00B0F170 /* cpHashSet.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A8273CF58F00B0F170 /* cpHashSet.c */; };
+		18BE51C9273CF58F00B0F170 /* cpSpaceStep.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51A9273CF58F00B0F170 /* cpSpaceStep.c */; };
+		18BE51CA273CF58F00B0F170 /* cpRotaryLimitJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51AA273CF58F00B0F170 /* cpRotaryLimitJoint.c */; };
+		18BE51CB273CF58F00B0F170 /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = 18BE51AB273CF58F00B0F170 /* cpSpace.c */; };
+		18BE51CE273CF67300B0F170 /* prime.h in Headers */ = {isa = PBXBuildFile; fileRef = 18BE51CC273CF67300B0F170 /* prime.h */; };
+		18BE51CF273CF67300B0F170 /* chipmunk in Resources */ = {isa = PBXBuildFile; fileRef = 18BE51CD273CF67300B0F170 /* chipmunk */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		18BE518C273CF58E00B0F170 /* cpDampedRotarySpring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpDampedRotarySpring.c; path = ../src/cpDampedRotarySpring.c; sourceTree = "<group>"; };
+		18BE518D273CF58E00B0F170 /* cpConstraint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpConstraint.c; path = ../src/cpConstraint.c; sourceTree = "<group>"; };
+		18BE518E273CF58E00B0F170 /* cpSpaceDebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceDebug.c; path = ../src/cpSpaceDebug.c; sourceTree = "<group>"; };
+		18BE518F273CF58E00B0F170 /* cpSpaceHash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceHash.c; path = ../src/cpSpaceHash.c; sourceTree = "<group>"; };
+		18BE5190273CF58E00B0F170 /* cpShape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpShape.c; path = ../src/cpShape.c; sourceTree = "<group>"; };
+		18BE5191273CF58E00B0F170 /* cpArbiter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpArbiter.c; path = ../src/cpArbiter.c; sourceTree = "<group>"; };
+		18BE5192273CF58E00B0F170 /* cpRobust.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpRobust.c; path = ../src/cpRobust.c; sourceTree = "<group>"; };
+		18BE5193273CF58E00B0F170 /* cpRatchetJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpRatchetJoint.c; path = ../src/cpRatchetJoint.c; sourceTree = "<group>"; };
+		18BE5194273CF58E00B0F170 /* cpPinJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPinJoint.c; path = ../src/cpPinJoint.c; sourceTree = "<group>"; };
+		18BE5195273CF58E00B0F170 /* cpMarch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpMarch.c; path = ../src/cpMarch.c; sourceTree = "<group>"; };
+		18BE5196273CF58E00B0F170 /* cpArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpArray.c; path = ../src/cpArray.c; sourceTree = "<group>"; };
+		18BE5197273CF58E00B0F170 /* cpGearJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpGearJoint.c; path = ../src/cpGearJoint.c; sourceTree = "<group>"; };
+		18BE5198273CF58E00B0F170 /* cpSweep1D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSweep1D.c; path = ../src/cpSweep1D.c; sourceTree = "<group>"; };
+		18BE5199273CF58E00B0F170 /* cpCollision.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpCollision.c; path = ../src/cpCollision.c; sourceTree = "<group>"; };
+		18BE519A273CF58E00B0F170 /* cpSpaceComponent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceComponent.c; path = ../src/cpSpaceComponent.c; sourceTree = "<group>"; };
+		18BE519B273CF58E00B0F170 /* cpSimpleMotor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSimpleMotor.c; path = ../src/cpSimpleMotor.c; sourceTree = "<group>"; };
+		18BE519C273CF58E00B0F170 /* cpPolyShape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPolyShape.c; path = ../src/cpPolyShape.c; sourceTree = "<group>"; };
+		18BE519D273CF58E00B0F170 /* cpBBTree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpBBTree.c; path = ../src/cpBBTree.c; sourceTree = "<group>"; };
+		18BE519E273CF58E00B0F170 /* cpSlideJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSlideJoint.c; path = ../src/cpSlideJoint.c; sourceTree = "<group>"; };
+		18BE519F273CF58E00B0F170 /* cpDampedSpring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpDampedSpring.c; path = ../src/cpDampedSpring.c; sourceTree = "<group>"; };
+		18BE51A0273CF58F00B0F170 /* cpSpatialIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpatialIndex.c; path = ../src/cpSpatialIndex.c; sourceTree = "<group>"; };
+		18BE51A1273CF58F00B0F170 /* chipmunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = chipmunk.c; path = ../src/chipmunk.c; sourceTree = "<group>"; };
+		18BE51A2273CF58F00B0F170 /* cpSpaceQuery.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceQuery.c; path = ../src/cpSpaceQuery.c; sourceTree = "<group>"; };
+		18BE51A3273CF58F00B0F170 /* cpBody.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpBody.c; path = ../src/cpBody.c; sourceTree = "<group>"; };
+		18BE51A4273CF58F00B0F170 /* cpGrooveJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpGrooveJoint.c; path = ../src/cpGrooveJoint.c; sourceTree = "<group>"; };
+		18BE51A5273CF58F00B0F170 /* cpHastySpace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpHastySpace.c; path = ../src/cpHastySpace.c; sourceTree = "<group>"; };
+		18BE51A6273CF58F00B0F170 /* cpPolyline.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPolyline.c; path = ../src/cpPolyline.c; sourceTree = "<group>"; };
+		18BE51A7273CF58F00B0F170 /* cpPivotJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpPivotJoint.c; path = ../src/cpPivotJoint.c; sourceTree = "<group>"; };
+		18BE51A8273CF58F00B0F170 /* cpHashSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpHashSet.c; path = ../src/cpHashSet.c; sourceTree = "<group>"; };
+		18BE51A9273CF58F00B0F170 /* cpSpaceStep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpaceStep.c; path = ../src/cpSpaceStep.c; sourceTree = "<group>"; };
+		18BE51AA273CF58F00B0F170 /* cpRotaryLimitJoint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpRotaryLimitJoint.c; path = ../src/cpRotaryLimitJoint.c; sourceTree = "<group>"; };
+		18BE51AB273CF58F00B0F170 /* cpSpace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpSpace.c; path = ../src/cpSpace.c; sourceTree = "<group>"; };
+		18BE51CC273CF67300B0F170 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = prime.h; path = ../include/prime.h; sourceTree = "<group>"; };
+		18BE51CD273CF67300B0F170 /* chipmunk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = chipmunk; path = ../include/chipmunk; sourceTree = "<group>"; };
+		18D4F3042738DFCE0019B295 /* libchipmunk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libchipmunk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18D4F3012738DFCE0019B295 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18D4F2FA2738DFCE0019B295 = {
+			isa = PBXGroup;
+			children = (
+				18E8A3682738F49F00E18839 /* src */,
+				18E8A32F2738F48B00E18839 /* include */,
+				18D4F3052738DFCE0019B295 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18D4F3052738DFCE0019B295 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18D4F3042738DFCE0019B295 /* libchipmunk.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18E8A32F2738F48B00E18839 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				18BE51CD273CF67300B0F170 /* chipmunk */,
+				18BE51CC273CF67300B0F170 /* prime.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		18E8A3682738F49F00E18839 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				18BE51A1273CF58F00B0F170 /* chipmunk.c */,
+				18BE5191273CF58E00B0F170 /* cpArbiter.c */,
+				18BE5196273CF58E00B0F170 /* cpArray.c */,
+				18BE519D273CF58E00B0F170 /* cpBBTree.c */,
+				18BE51A3273CF58F00B0F170 /* cpBody.c */,
+				18BE5199273CF58E00B0F170 /* cpCollision.c */,
+				18BE518D273CF58E00B0F170 /* cpConstraint.c */,
+				18BE518C273CF58E00B0F170 /* cpDampedRotarySpring.c */,
+				18BE519F273CF58E00B0F170 /* cpDampedSpring.c */,
+				18BE5197273CF58E00B0F170 /* cpGearJoint.c */,
+				18BE51A4273CF58F00B0F170 /* cpGrooveJoint.c */,
+				18BE51A8273CF58F00B0F170 /* cpHashSet.c */,
+				18BE51A5273CF58F00B0F170 /* cpHastySpace.c */,
+				18BE5195273CF58E00B0F170 /* cpMarch.c */,
+				18BE5194273CF58E00B0F170 /* cpPinJoint.c */,
+				18BE51A7273CF58F00B0F170 /* cpPivotJoint.c */,
+				18BE51A6273CF58F00B0F170 /* cpPolyline.c */,
+				18BE519C273CF58E00B0F170 /* cpPolyShape.c */,
+				18BE5193273CF58E00B0F170 /* cpRatchetJoint.c */,
+				18BE5192273CF58E00B0F170 /* cpRobust.c */,
+				18BE51AA273CF58F00B0F170 /* cpRotaryLimitJoint.c */,
+				18BE5190273CF58E00B0F170 /* cpShape.c */,
+				18BE519B273CF58E00B0F170 /* cpSimpleMotor.c */,
+				18BE519E273CF58E00B0F170 /* cpSlideJoint.c */,
+				18BE51AB273CF58F00B0F170 /* cpSpace.c */,
+				18BE519A273CF58E00B0F170 /* cpSpaceComponent.c */,
+				18BE518E273CF58E00B0F170 /* cpSpaceDebug.c */,
+				18BE518F273CF58E00B0F170 /* cpSpaceHash.c */,
+				18BE51A2273CF58F00B0F170 /* cpSpaceQuery.c */,
+				18BE51A9273CF58F00B0F170 /* cpSpaceStep.c */,
+				18BE51A0273CF58F00B0F170 /* cpSpatialIndex.c */,
+				18BE5198273CF58E00B0F170 /* cpSweep1D.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		18D4F2FF2738DFCE0019B295 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18BE51CE273CF67300B0F170 /* prime.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		18D4F3032738DFCE0019B295 /* libchipmunk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D4F30B2738DFCE0019B295 /* Build configuration list for PBXNativeTarget "libchipmunk" */;
+			buildPhases = (
+				18D4F2FF2738DFCE0019B295 /* Headers */,
+				18D4F3002738DFCE0019B295 /* Sources */,
+				18D4F3012738DFCE0019B295 /* Frameworks */,
+				18D4F3022738DFCE0019B295 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libchipmunk;
+			productName = catalyst;
+			productReference = 18D4F3042738DFCE0019B295 /* libchipmunk.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18D4F2FB2738DFCE0019B295 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					18D4F3032738DFCE0019B295 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 18D4F2FE2738DFCE0019B295 /* Build configuration list for PBXProject "chipmunk.maccatalyst" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18D4F2FA2738DFCE0019B295;
+			productRefGroup = 18D4F3052738DFCE0019B295 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18D4F3032738DFCE0019B295 /* libchipmunk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18D4F3022738DFCE0019B295 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18BE51CF273CF67300B0F170 /* chipmunk in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18D4F3002738DFCE0019B295 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18BE51AE273CF58F00B0F170 /* cpSpaceDebug.c in Sources */,
+				18BE51BA273CF58F00B0F170 /* cpSpaceComponent.c in Sources */,
+				18BE51C3273CF58F00B0F170 /* cpBody.c in Sources */,
+				18BE51BD273CF58F00B0F170 /* cpBBTree.c in Sources */,
+				18BE51B4273CF58F00B0F170 /* cpPinJoint.c in Sources */,
+				18BE51C1273CF58F00B0F170 /* chipmunk.c in Sources */,
+				18BE51B5273CF58F00B0F170 /* cpMarch.c in Sources */,
+				18BE51C0273CF58F00B0F170 /* cpSpatialIndex.c in Sources */,
+				18BE51C8273CF58F00B0F170 /* cpHashSet.c in Sources */,
+				18BE51C7273CF58F00B0F170 /* cpPivotJoint.c in Sources */,
+				18BE51C6273CF58F00B0F170 /* cpPolyline.c in Sources */,
+				18BE51AF273CF58F00B0F170 /* cpSpaceHash.c in Sources */,
+				18BE51BC273CF58F00B0F170 /* cpPolyShape.c in Sources */,
+				18BE51B7273CF58F00B0F170 /* cpGearJoint.c in Sources */,
+				18BE51CA273CF58F00B0F170 /* cpRotaryLimitJoint.c in Sources */,
+				18BE51C4273CF58F00B0F170 /* cpGrooveJoint.c in Sources */,
+				18BE51BE273CF58F00B0F170 /* cpSlideJoint.c in Sources */,
+				18BE51B2273CF58F00B0F170 /* cpRobust.c in Sources */,
+				18BE51BF273CF58F00B0F170 /* cpDampedSpring.c in Sources */,
+				18BE51B3273CF58F00B0F170 /* cpRatchetJoint.c in Sources */,
+				18BE51B6273CF58F00B0F170 /* cpArray.c in Sources */,
+				18BE51B1273CF58F00B0F170 /* cpArbiter.c in Sources */,
+				18BE51B9273CF58F00B0F170 /* cpCollision.c in Sources */,
+				18BE51B8273CF58F00B0F170 /* cpSweep1D.c in Sources */,
+				18BE51B0273CF58F00B0F170 /* cpShape.c in Sources */,
+				18BE51CB273CF58F00B0F170 /* cpSpace.c in Sources */,
+				18BE51AC273CF58F00B0F170 /* cpDampedRotarySpring.c in Sources */,
+				18BE51BB273CF58F00B0F170 /* cpSimpleMotor.c in Sources */,
+				18BE51C5273CF58F00B0F170 /* cpHastySpace.c in Sources */,
+				18BE51C9273CF58F00B0F170 /* cpSpaceStep.c in Sources */,
+				18BE51AD273CF58F00B0F170 /* cpConstraint.c in Sources */,
+				18BE51C2273CF58F00B0F170 /* cpSpaceQuery.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		18D4F3092738DFCE0019B295 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					LUA_USE_POSIX,
+					LUA_USE_APPLE,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		18D4F30A2738DFCE0019B295 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LUA_USE_APPLE,
+					LUA_USE_POSIX,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		18D4F30C2738DFCE0019B295 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FQHJB2L9HW;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codefoco.catalyst;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../include;
+			};
+			name = Debug;
+		};
+		18D4F30D2738DFCE0019B295 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = FQHJB2L9HW;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = "-DNDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.codefoco.catalyst;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = ../include;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18D4F2FE2738DFCE0019B295 /* Build configuration list for PBXProject "chipmunk.maccatalyst" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D4F3092738DFCE0019B295 /* Debug */,
+				18D4F30A2738DFCE0019B295 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D4F30B2738DFCE0019B295 /* Build configuration list for PBXNativeTarget "libchipmunk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D4F30C2738DFCE0019B295 /* Debug */,
+				18D4F30D2738DFCE0019B295 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18D4F2FB2738DFCE0019B295 /* Project object */;
+}
