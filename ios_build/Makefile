@@ -4,18 +4,18 @@ all: ios tvos maccatalyst
 
 ios: ./ios/libchipmunk.framework/libchipmunk
 ./ios/libchipmunk.framework/libchipmunk:
-	xcodebuild  -project chipmunk.ios.xcodeproj -configuration Release -sdk iphonesimulator
-	xcodebuild  -project chipmunk.ios.xcodeproj  -configuration Release -sdk iphoneos
+	xcodebuild DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING=1 -project chipmunk.ios.xcodeproj -configuration Release -sdk iphonesimulator
+	xcodebuild DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING=1 -project chipmunk.ios.xcodeproj  -configuration Release -sdk iphoneos
 	ditto ./Build/Release-iphoneos/ ./ios/
 	rm ./ios/libchipmunk.framework/libchipmunk
 	lipo -create ./build/Release-iphonesimulator/libchipmunk.framework/libchipmunk  ./build/Release-iphoneos/libchipmunk.framework/libchipmunk -output  ./ios/libchipmunk.framework/libchipmunk
 
 tvos: ./tvos/libchipmunk.framework/libchipmunk
 ./tvos/libchipmunk.framework/libchipmunk:
-	xcodebuild  -project chipmunk.tvos.xcodeproj -configuration Release -sdk appletvsimulator
+	xcodebuild DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING=1 -project chipmunk.tvos.xcodeproj -configuration Release -sdk appletvsimulator
 	# Xcode 12 has a bug where it adds arm64 to appletv simulator
 	./fix_tvos.sh
-	xcodebuild  -project chipmunk.tvos.xcodeproj  -configuration Release -sdk appletvos
+	xcodebuild DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING=1 -project chipmunk.tvos.xcodeproj  -configuration Release -sdk appletvos
 	ditto ./Build/Release-appletvos/ ./tvos/
 	rm ./tvos/libchipmunk.framework/libchipmunk
 	lipo -create ./build/Release-appletvsimulator/libchipmunk.framework/libchipmunk  ./build/Release-appletvos/libchipmunk.framework/libchipmunk -output  ./tvos/libchipmunk.framework/libchipmunk
