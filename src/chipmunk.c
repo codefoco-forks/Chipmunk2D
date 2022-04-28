@@ -295,7 +295,7 @@ void cpSpaceEachConstraint_b(cpSpace *space, void (^block)(cpConstraint *constra
 
 static void BodyIteratorFunc(cpBody *body, void *ptr, void (^block)(void *ptr))
 {
-	body = NULL;
+	(void)body;
 	block(ptr);
 }
 
