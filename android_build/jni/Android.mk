@@ -6,7 +6,7 @@ LOCAL_CFLAGS    := -I../include -DNDEBUG
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-	LOCAL_ARM_NEON  := false
+	LOCAL_CFLAGS += -DDISABLE_NEON
 endif
 
 ifeq ($(TARGET_ARCH_ABI), arm64-v8a)

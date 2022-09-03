@@ -223,7 +223,7 @@ int pthread_join(pthread_t thread, void **value_ptr)
 
 //MARK: ARM NEON Solver
 
-#if defined(__ARM_HAVE_NEON) || __ARM_NEON__
+#if (defined(__ARM_HAVE_NEON) || __ARM_NEON__) && !defined(DISABLE_NEON)
 #include <arm_neon.h>
 
 // Tested and known to work fine with Clang 3.0 and GCC 4.2
@@ -483,7 +483,7 @@ Solver(cpSpace *space, unsigned long worker, unsigned long worker_count)
 	for(unsigned long i=0; i<iterations; i++){
 		for(int j=0; j<arbiters->num; j++){
 			cpArbiter *arb = (cpArbiter *)arbiters->arr[j];
-			#ifdef __ARM_NEON__
+			#if defined(__ARM_NEON__) && !defined(DISABLE_NEON)
 				cpArbiterApplyImpulse_NEON(arb);
 			#else
 				cpArbiterApplyImpulse(arb);
