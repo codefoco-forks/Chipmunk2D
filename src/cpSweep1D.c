@@ -233,7 +233,7 @@ cpSweep1DReindexQuery(cpSweep1D *sweep, cpSpatialIndexQueryFunc func, void *data
 		TableCell cell = table[i];
 		cpFloat max = cell.bounds.max;
 		
-		for(int j=i+1; table[j].bounds.min < max && j<count; j++){
+		for(int j=i+1; j < count && table[j].bounds.min < max ; j++){
 			func(cell.obj, table[j].obj, 0, data);
 		}
 	}

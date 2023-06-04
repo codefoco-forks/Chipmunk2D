@@ -316,7 +316,6 @@ cpArbiterInit(cpArbiter *arb, cpShape *a, cpShape *b)
 	arb->handler = NULL;
 	arb->swapped = cpFalse;
 	
-	arb->handler = NULL;
 	arb->handlerA = NULL;
 	arb->handlerB = NULL;
 	
