@@ -4,7 +4,7 @@ LOCAL_C_INCLUDES += ../include
 LOCAL_MODULE    := chipmunk
 LOCAL_CFLAGS    := -I../include -DNDEBUG
 LOCAL_LDLIBS := -L$(SYSROOT)/usr/lib -llog
-
+LOCAL_LDFLAGS += "-Wl,-z,max-page-size=16384"
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 	LOCAL_CFLAGS += -DDISABLE_NEON
 endif
