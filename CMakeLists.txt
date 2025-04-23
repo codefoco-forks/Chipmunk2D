@@ -125,6 +125,7 @@ IF (MSVC)
 ELSE()
 TARGET_COMPILE_OPTIONS(libchipmunk PRIVATE -ffast-math -Wall
 	-Wextra
+	-Wno-nan-infinity-disabled
 	-Wpedantic
 	-Werror)
 ENDIF()
