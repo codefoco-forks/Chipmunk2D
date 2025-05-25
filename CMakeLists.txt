@@ -1,5 +1,5 @@
 # Changed by Vinicius Jarina (viniciusjarina@gmail.com)
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 PROJECT (chipmunk)
 
 IF (CMAKE_SIZEOF_VOID_P EQUAL 8)
