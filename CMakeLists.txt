@@ -1,5 +1,5 @@
 # Changed by Vinicius Jarina (viniciusjarina@gmail.com)
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.5)
 PROJECT (chipmunk)
 
 IF (CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -123,11 +123,18 @@ IF (MSVC)
 	SET_TARGET_PROPERTIES(libchipmunk PROPERTIES LINKER_LANGUAGE CXX)
 	TARGET_COMPILE_OPTIONS(libchipmunk PRIVATE /W4	/WX)
 ELSE()
-TARGET_COMPILE_OPTIONS(libchipmunk PRIVATE -ffast-math -Wall
-	-Wextra
-	-Wno-nan-infinity-disabled
-	-Wpedantic
-	-Werror)
+	IF (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "14.0")
+		TARGET_COMPILE_OPTIONS(libchipmunk PRIVATE -ffast-math -Wall
+			-Wextra
+			-Wpedantic
+			-Werror)
+	ELSE()
+		TARGET_COMPILE_OPTIONS(libchipmunk PRIVATE -ffast-math -Wall
+			-Wextra
+			-Wno-nan-infinity-disabled
+			-Wpedantic
+			-Werror)
+	ENDIF()
 ENDIF()
 
 TARGET_LINK_LIBRARIES ( libchipmunk ${LIBS} )

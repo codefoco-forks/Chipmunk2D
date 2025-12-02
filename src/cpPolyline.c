@@ -563,7 +563,8 @@ DeepestNotch(int count, cpVect *verts, int hullCount, cpVect *hullVerts, int fir
 	(void)(tol);
 	
 	struct Notch notch;
-    notch.d = CPFLOAT_MIN;
+	notch.d = CPFLOAT_MIN;
+	notch.n = cpvzero;
 
 	int j = Next(first, count);
 	
