@@ -28,6 +28,32 @@ CP_DeclareShapeGetter(struct, type, name){ \
 	return ((struct *)shape)->member; \
 }
 
+cpSegmentQueryInfo MakeSegmentQueryInfo(const cpShape *shape,
+	cpVect point,
+	cpVect normal,
+	cpFloat alpha)
+{
+	cpSegmentQueryInfo query;
+	query.shape = shape;
+	query.point = point;
+	query.normal = normal;
+	query.alpha = alpha;
+	return query;
+}
+
+struct cpShapeMassInfo MakeShapeMassInfo(cpFloat m,
+										cpFloat i,
+										cpVect cog,
+										cpFloat area)
+{
+	struct cpShapeMassInfo info;
+	info.m = m;
+	info.i = i;
+	info.cog = cog;
+	info.area = area;
+	return info;
+}
+
 cpShape *
 cpShapeInit(cpShape *shape, const cpShapeClass *klass, cpBody *body, struct cpShapeMassInfo massInfo)
 {

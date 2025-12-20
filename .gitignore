@@ -63,3 +63,4 @@ ios_build/ios
 ios_build/tvos
 ios_build/watchos
 linux-arm64/*
+osx-x64/*

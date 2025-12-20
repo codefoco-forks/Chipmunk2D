@@ -409,6 +409,26 @@ cpSpaceIsLocked(cpSpace *space)
 
 //MARK: Collision Handler Function Management
 
+static inline cpCollisionHandler MakeCollisionHandler(
+	const cpCollisionType typeA,
+	const cpCollisionType typeB,
+	cpCollisionBeginFunc beginFunc,
+	cpCollisionPreSolveFunc preSolveFunc,
+	cpCollisionPostSolveFunc postSolveFunc,
+	cpCollisionSeparateFunc separateFunc,
+	cpDataPointer userData)
+{
+	cpCollisionHandler handler;
+	handler.typeA = typeA;
+	handler.typeB = typeB;
+	handler.beginFunc = beginFunc;
+	handler.preSolveFunc = preSolveFunc;
+	handler.postSolveFunc = postSolveFunc;
+	handler.separateFunc = separateFunc;
+	handler.userData = userData;
+	return handler;
+}
+
 static void
 cpSpaceUseWildcardDefaultHandler(cpSpace *space)
 {

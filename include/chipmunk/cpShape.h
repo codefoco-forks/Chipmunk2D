@@ -48,19 +48,10 @@ typedef struct cpSegmentQueryInfo {
 	cpFloat alpha;
 } cpSegmentQueryInfo;
 
-inline cpSegmentQueryInfo MakeSegmentQueryInfo(const cpShape *shape,
-	cpVect point,
-	cpVect normal,
-	cpFloat alpha)
-{
-	cpSegmentQueryInfo query;
-	query.shape = shape;
-	query.point = point;
-	query.normal = normal;
-	query.alpha = alpha;
-	return query;
-}
-
+cpSegmentQueryInfo MakeSegmentQueryInfo(const cpShape *shape,
+										cpVect point,
+										cpVect normal,
+										cpFloat alpha);
 
 /// Destroy a shape.
 CP_EXPORT void cpShapeDestroy(cpShape *shape);
