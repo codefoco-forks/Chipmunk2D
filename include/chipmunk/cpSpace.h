@@ -41,10 +41,10 @@ typedef void (*cpCollisionSeparateFunc)(cpArbiter *arb, cpSpace *space, cpDataPo
 struct cpCollisionHandler {
 	/// Collision type identifier of the first shape that this handler recognizes.
 	/// In the collision handler callback, the shape with this type will be the first argument. Read only.
-	const cpCollisionType typeA;
+	cpCollisionType typeA;
 	/// Collision type identifier of the second shape that this handler recognizes.
 	/// In the collision handler callback, the shape with this type will be the second argument. Read only.
-	const cpCollisionType typeB;
+	cpCollisionType typeB;
 	/// This function is called when two shapes with types that match this collision handler begin colliding.
 	cpCollisionBeginFunc beginFunc;
 	/// This function is called each step when two shapes with types that match this collision handler are colliding.
@@ -58,6 +58,26 @@ struct cpCollisionHandler {
 	/// This is a user definable context pointer that is passed to all of the collision handler functions.
 	cpDataPointer userData;
 };
+
+inline cpCollisionHandler MakeCollisionHandler(
+	const cpCollisionType typeA,
+	const cpCollisionType typeB,
+	cpCollisionBeginFunc beginFunc,
+	cpCollisionPreSolveFunc preSolveFunc,
+	cpCollisionPostSolveFunc postSolveFunc,
+	cpCollisionSeparateFunc separateFunc,
+	cpDataPointer userData)
+{
+	cpCollisionHandler handler;
+	handler.typeA = typeA;
+	handler.typeB = typeB;
+	handler.beginFunc = beginFunc;
+	handler.preSolveFunc = preSolveFunc;
+	handler.postSolveFunc = postSolveFunc;
+	handler.separateFunc = separateFunc;
+	handler.userData = userData;
+	return handler;
+}
 
 // TODO: Make timestep a parameter?
 

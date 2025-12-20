@@ -60,7 +60,9 @@ cpSpaceActivateBody(cpSpace *space, cpBody *body)
 				
 				// Reinsert the arbiter into the arbiter cache
 				const cpShape *a = arb->a, *b = arb->b;
-				const cpShape *shape_pair[] = {a, b};
+				const cpShape *shape_pair[2];
+				shape_pair[0] = a;
+				shape_pair[1] = b;
 				cpHashValue arbHashID = CP_HASH_PAIR((cpHashValue)a, (cpHashValue)b);
 				cpHashSetInsert(space->cachedArbiters, arbHashID, shape_pair, NULL, arb);
 				

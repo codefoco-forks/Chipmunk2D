@@ -52,6 +52,19 @@ typedef struct dynamicToStaticContext {
 	void *data;
 } dynamicToStaticContext;
 
+static inline dynamicToStaticContext MakeDynamicToStaticContext(cpSpatialIndexBBFunc bbfunc,
+cpSpatialIndex *staticIndex,
+cpSpatialIndexQueryFunc queryFunc,
+void *data)
+{
+	dynamicToStaticContext context;
+	context.bbfunc = bbfunc;
+	context.staticIndex = staticIndex;
+	context.queryFunc = queryFunc;
+	context.data = data;
+	return context;
+}
+
 static void
 dynamicToStaticIter(void *obj, dynamicToStaticContext *context)
 {
@@ -62,7 +75,7 @@ void
 cpSpatialIndexCollideStatic(cpSpatialIndex *dynamicIndex, cpSpatialIndex *staticIndex, cpSpatialIndexQueryFunc func, void *data)
 {
 	if(staticIndex && cpSpatialIndexCount(staticIndex) > 0){
-		dynamicToStaticContext context = {dynamicIndex->bbfunc, staticIndex, func, data};
+		dynamicToStaticContext context = MakeDynamicToStaticContext(dynamicIndex->bbfunc, staticIndex, func, data);
 		cpSpatialIndexEach(dynamicIndex, (cpSpatialIndexIteratorFunc)dynamicToStaticIter, &context);
 	}
 }

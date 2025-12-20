@@ -30,6 +30,19 @@ struct PointQueryContext {
 	cpSpacePointQueryFunc func;
 };
 
+static inline struct PointQueryContext MakePointQueryContext(cpVect point,
+	cpFloat maxDistance,
+	cpBitmask mask,
+	cpSpacePointQueryFunc func)
+{
+	struct PointQueryContext context;
+	context.point = point;
+	context.maxDistance = maxDistance;
+	context.mask = mask;
+	context.func = func;
+	return context;
+}
+
 static cpCollisionID
 NearestPointQuery(struct PointQueryContext *context, cpShape *shape, cpCollisionID id, void *data)
 {
@@ -48,7 +61,7 @@ NearestPointQuery(struct PointQueryContext *context, cpShape *shape, cpCollision
 void
 cpSpacePointQuery(cpSpace *space, cpVect point, cpFloat maxDistance, cpBitmask mask, cpSpacePointQueryFunc func, void *data)
 {
-	struct PointQueryContext context = {point, maxDistance, mask, func};
+	struct PointQueryContext context = MakePointQueryContext(point, maxDistance, mask, func);
 	cpBB bb = cpBBNewForCircle(point, cpfmax(maxDistance, 0.0f));
 	
 	cpSpaceLock(space); {
@@ -75,18 +88,23 @@ NearestPointQueryNearest(struct PointQueryContext *context, cpShape *shape, cpCo
 cpShape *
 cpSpacePointQueryNearest(cpSpace *space, cpVect point, cpFloat maxDistance, cpBitmask mask, cpPointQueryInfo *out)
 {
-	cpPointQueryInfo info = {NULL, cpvzero, maxDistance, cpvzero};
+	cpPointQueryInfo info;
+	info.shape = NULL;
+	info.point = cpvzero;
+	info.distance = maxDistance;
+	info.gradient = cpvzero;
+
 	if(out){
 		(*out) = info;
   } else {
 		out = &info;
 	}
 	
-	struct PointQueryContext context = {
+	struct PointQueryContext context = MakePointQueryContext(
 		point, maxDistance,
 		mask,
 		NULL
-	};
+	);
 	
 	cpBB bb = cpBBNewForCircle(point, cpfmax(maxDistance, 0.0f));
 	cpSpatialIndexQuery(space->dynamicShapes, &context, bb, (cpSpatialIndexQueryFunc)NearestPointQueryNearest, out);
@@ -104,6 +122,20 @@ struct SegmentQueryContext {
 	cpBitmask mask;
 	cpSpaceSegmentQueryFunc func;
 };
+
+static inline struct SegmentQueryContext MakeSegmentQueryContext(cpVect start, cpVect end,
+cpFloat radius,
+cpBitmask mask,
+cpSpaceSegmentQueryFunc func)
+{
+	struct SegmentQueryContext context;
+	context.start = start;
+	context.end = end;
+	context.radius = radius;
+	context.mask = mask;
+	context.func = func;
+	return context;
+}
 
 static cpFloat
 SegmentQuery(struct SegmentQueryContext *context, cpShape *shape, void *data)
@@ -123,12 +155,12 @@ SegmentQuery(struct SegmentQueryContext *context, cpShape *shape, void *data)
 void
 cpSpaceSegmentQuery(cpSpace *space, cpVect start, cpVect end, cpFloat radius, cpBitmask mask, cpSpaceSegmentQueryFunc func, void *data)
 {
-	struct SegmentQueryContext context = {
+	struct SegmentQueryContext context = MakeSegmentQueryContext(
 		start, end,
 		radius,
 		mask,
-		func,
-	};
+		func
+	);
 	
 	cpSpaceLock(space); {
     cpSpatialIndexSegmentQuery(space->staticShapes, &context, start, end, 1.0f, (cpSpatialIndexSegmentQueryFunc)SegmentQuery, data);
@@ -155,19 +187,19 @@ SegmentQueryFirst(struct SegmentQueryContext *context, cpShape *shape, cpSegment
 cpShape *
 cpSpaceSegmentQueryFirst(cpSpace *space, cpVect start, cpVect end, cpFloat radius, cpBitmask mask, cpSegmentQueryInfo *out)
 {
-	cpSegmentQueryInfo info = {NULL, end, cpvzero, 1.0f};
+	cpSegmentQueryInfo info = MakeSegmentQueryInfo(NULL, end, cpvzero, 1.0f);
 	if(out){
 		(*out) = info;
   } else {
 		out = &info;
 	}
 	
-	struct SegmentQueryContext context = {
+	struct SegmentQueryContext context = MakeSegmentQueryContext(
 		start, end,
 		radius,
 		mask,
 		NULL
-	};
+	);
 	
 	cpSpatialIndexSegmentQuery(space->staticShapes, &context, start, end, 1.0f, (cpSpatialIndexSegmentQueryFunc)SegmentQueryFirst, out);
 	cpSpatialIndexSegmentQuery(space->dynamicShapes, &context, start, end, out->alpha, (cpSpatialIndexSegmentQueryFunc)SegmentQueryFirst, out);
@@ -199,7 +231,10 @@ BBQuery(struct BBQueryContext *context, cpShape *shape, cpCollisionID id, void *
 void
 cpSpaceBBQuery(cpSpace *space, cpBB bb, cpBitmask mask, cpSpaceBBQueryFunc func, void *data)
 {
-	struct BBQueryContext context = {bb, mask, func};
+	struct BBQueryContext context;
+	context.bb = bb;
+	context.mask = mask;
+	context.func = func;
 	
 	cpSpaceLock(space); {
 	cpSpatialIndexQuery(space->dynamicShapes, &context, bb, (cpSpatialIndexQueryFunc)BBQuery, data);
@@ -214,6 +249,17 @@ struct ShapeQueryContext {
 	void *data;
 	cpBool anyCollision;
 };
+
+static inline struct ShapeQueryContext MakeShapeQueryContext(cpSpaceShapeQueryFunc func,
+	void *data,
+	cpBool anyCollision)
+{
+	struct ShapeQueryContext context;
+	context.func = func;
+	context.data = data;
+	context.anyCollision = anyCollision;
+	return context;
+}
 
 // Callback from the spatial hash.
 static cpCollisionID
@@ -235,7 +281,7 @@ cpSpaceShapeQuery(cpSpace *space, cpShape *shape, cpSpaceShapeQueryFunc func, vo
 {
 	cpBody *body = shape->body;
 	cpBB bb = (body ? cpShapeUpdate(shape, body->transform) : shape->bb);
-	struct ShapeQueryContext context = {func, data, cpFalse};
+	struct ShapeQueryContext context = MakeShapeQueryContext(func, data, cpFalse);
 	
 	cpSpaceLock(space); {
     cpSpatialIndexQuery(space->dynamicShapes, shape, bb, (cpSpatialIndexQueryFunc)ShapeQuery, &context);

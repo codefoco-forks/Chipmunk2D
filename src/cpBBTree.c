@@ -208,7 +208,18 @@ PairInsert(Node *a, Node *b, cpBBTree *tree)
 {
 	Pair *nextA = a->PAIRS, *nextB = b->PAIRS;
 	Pair *pair = PairFromPool(tree);
-	Pair temp = {{NULL, a, nextA},{NULL, b, nextB}, 0};
+	Pair temp;
+	Thread ta;
+	Thread tb;
+	ta.prev = NULL;
+	ta.leaf = a;
+	ta.next = nextA;
+	tb.prev = NULL;
+	tb.leaf = b;
+	tb.next = nextB;
+	temp.a = ta;
+	temp.b = tb;
+	temp.id = 0;
 	
 	a->PAIRS = b->PAIRS = pair;
 	*pair = temp;
@@ -422,6 +433,19 @@ typedef struct MarkContext {
 	void *data;
 } MarkContext;
 
+static inline MarkContext MakeMarkContext(cpBBTree *tree,
+	Node *staticRoot,
+	cpSpatialIndexQueryFunc func,
+	void *data)
+{
+	MarkContext context;
+	context.tree = tree;
+	context.staticRoot = staticRoot;
+	context.func = func;
+	context.data = data;
+	return context;
+}
+
 static void
 MarkLeafQuery(Node *subtree, Node *leaf, cpBool left, MarkContext *context)
 {
@@ -533,12 +557,12 @@ LeafAddPairs(Node *leaf, cpBBTree *tree)
 		Node *dynamicRoot = GetRootIfTree(dynamicIndex);
 		if(dynamicRoot){
 			cpBBTree *dynamicTree = GetTree(dynamicIndex);
-			MarkContext context = {dynamicTree, NULL, NULL, NULL};
+			MarkContext context = MakeMarkContext(dynamicTree, NULL, NULL, NULL);
 			MarkLeafQuery(dynamicRoot, leaf, cpTrue, &context);
 		}
 	} else {
 		Node *staticRoot = GetRootIfTree(tree->spatialIndex.staticIndex);
-		MarkContext context = {tree, staticRoot, VoidQueryFunc, NULL};
+		MarkContext context = MakeMarkContext(tree, staticRoot, VoidQueryFunc, NULL);
 		MarkLeaf(leaf, &context);
 	}
 }
@@ -654,7 +678,7 @@ cpBBTreeReindexQuery(cpBBTree *tree, cpSpatialIndexQueryFunc func, void *data)
 	cpSpatialIndex *staticIndex = tree->spatialIndex.staticIndex;
 	Node *staticRoot = (staticIndex && staticIndex->klass == Klass() ? ((cpBBTree *)staticIndex)->root : NULL);
 	
-	MarkContext context = {tree, staticRoot, func, data};
+	MarkContext context = MakeMarkContext(tree, staticRoot, func, data);
 	MarkSubtree(tree->root, &context);
 	if(staticIndex && !staticRoot) cpSpatialIndexCollideStatic((cpSpatialIndex *)tree, staticIndex, func, data);
 	
@@ -710,7 +734,9 @@ static void each_helper(Node *node, eachContext *context){context->func(node->ob
 static void
 cpBBTreeEach(cpBBTree *tree, cpSpatialIndexIteratorFunc func, void *data)
 {
-	eachContext context = {func, data};
+	eachContext context;
+	context.func = func;
+	context.data = data;
 	cpHashSetEach(tree->leaves, (cpHashSetIteratorFunc)each_helper, &context);
 }
 

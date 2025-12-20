@@ -86,7 +86,9 @@ struct SupportPoint {
 static inline struct SupportPoint
 SupportPointNew(cpVect p, cpCollisionID index)
 {
-	struct SupportPoint point = {p, index};
+	struct SupportPoint point;
+	point.p = p;
+	point.index = index;
 	return point;
 }
 
@@ -130,7 +132,11 @@ struct MinkowskiPoint {
 static inline struct MinkowskiPoint
 MinkowskiPointNew(const struct SupportPoint a, const struct SupportPoint b)
 {
-	struct MinkowskiPoint point = {a.p, b.p, cpvsub(b.p, a.p), (a.index & 0xFF)<<8 | (b.index & 0xFF)};
+	struct MinkowskiPoint point;
+	point.a = a.p;
+	point.b = b.p;
+	point.ab = cpvsub(b.p, a.p);
+	point.id = (a.index & 0xFF) << 8 | (b.index & 0xFF);
 	return point;
 }
 
@@ -139,6 +145,16 @@ struct SupportContext {
 	SupportPointFunc func1, func2;
 };
 
+static inline struct SupportContext MakeSupportContext(const cpShape *shape1, const cpShape *shape2,
+	SupportPointFunc func1, SupportPointFunc func2)
+{
+	struct SupportContext context;
+	context.shape1 = shape1;
+	context.shape2 = shape2;
+	context.func1 = func1;
+	context.func2 = func2;
+	return context;
+}
 // Calculate the maximal point on the minkowski difference of two shapes along a particular axis.
 static inline struct MinkowskiPoint
 Support(const struct SupportContext *ctx, const cpVect n)
@@ -154,12 +170,31 @@ struct EdgePoint {
 	cpHashValue hash;
 };
 
+static inline struct EdgePoint MakeEdgePoint(cpVect p, cpHashValue hash)
+{
+	struct EdgePoint ep;
+	ep.p = p;
+	ep.hash = hash;
+	return ep;
+}
+
 // Support edges are the edges of a polygon or segment shape that are in contact.
 struct Edge {
 	struct EdgePoint a, b;
 	cpFloat r;
 	cpVect n;
 };
+
+static inline struct Edge MakeEdge(struct EdgePoint a, struct EdgePoint b,
+	cpFloat r, cpVect n)
+{
+	struct Edge e;
+	e.a = a;
+	e.b = b;
+	e.r = r;
+	e.n = n;
+	return e;
+}
 
 static struct Edge
 SupportEdgeForPoly(const cpPolyShape *poly, const cpVect n)
@@ -174,10 +209,10 @@ SupportEdgeForPoly(const cpPolyShape *poly, const cpVect n)
 	const struct cpSplittingPlane *planes = poly->planes;
 	cpHashValue hashid = poly->shape.hashid;
 	if(cpvdot(n, planes[i1].n) > cpvdot(n, planes[i2].n)){
-		struct Edge edge = {{planes[i0].v0, CP_HASH_PAIR(hashid, i0)}, {planes[i1].v0, CP_HASH_PAIR(hashid, i1)}, poly->r, planes[i1].n};
+		struct Edge edge = MakeEdge(MakeEdgePoint(planes[i0].v0, CP_HASH_PAIR(hashid, i0)), MakeEdgePoint(planes[i1].v0, CP_HASH_PAIR(hashid, i1)), poly->r, planes[i1].n);
 		return edge;
 	} else {
-		struct Edge edge = {{planes[i1].v0, CP_HASH_PAIR(hashid, i1)}, {planes[i2].v0, CP_HASH_PAIR(hashid, i2)}, poly->r, planes[i2].n};
+		struct Edge edge = MakeEdge(MakeEdgePoint(planes[i1].v0, CP_HASH_PAIR(hashid, i1)), MakeEdgePoint(planes[i2].v0, CP_HASH_PAIR(hashid, i2)), poly->r, planes[i2].n);
 		return edge;
 	}
 }
@@ -187,10 +222,10 @@ SupportEdgeForSegment(const cpSegmentShape *seg, const cpVect n)
 {
 	cpHashValue hashid = seg->shape.hashid;
 	if(cpvdot(seg->tn, n) > 0.0){
-		struct Edge edge = {{seg->ta, CP_HASH_PAIR(hashid, 0)}, {seg->tb, CP_HASH_PAIR(hashid, 1)}, seg->r, seg->tn};
+		struct Edge edge = MakeEdge(MakeEdgePoint(seg->ta, CP_HASH_PAIR(hashid, 0)), MakeEdgePoint(seg->tb, CP_HASH_PAIR(hashid, 1)), seg->r, seg->tn);
 		return edge;
 	} else {
-		struct Edge edge = {{seg->tb, CP_HASH_PAIR(hashid, 1)}, {seg->ta, CP_HASH_PAIR(hashid, 0)}, seg->r, cpvneg(seg->tn)};
+		struct Edge edge = MakeEdge(MakeEdgePoint(seg->tb, CP_HASH_PAIR(hashid, 1)), MakeEdgePoint(seg->ta, CP_HASH_PAIR(hashid, 0)), seg->r, cpvneg(seg->tn));
 		return edge;
 	}
 }
@@ -246,14 +281,24 @@ ClosestPointsNew(const struct MinkowskiPoint v0, const struct MinkowskiPoint v1)
 	
 	if(d <= 0.0f || (-1.0f < t && t < 1.0f)){
 		// If the shapes are overlapping, or we have a regular vertex/edge collision, we are done.
-		struct ClosestPoints points = {pa, pb, n, d, id};
+		struct ClosestPoints points;
+		points.a = pa;
+		points.b = pb;
+		points.n = n;
+		points.d = d;
+		points.id = id;
 		return points;
 	} else {
 		// Vertex/vertex collisions need special treatment since the MSA won't be shared with an axis of the minkowski difference.
 		cpFloat d2 = cpvlength(p);
 		cpVect n2 = cpvmult(p, 1.0f/(d2 + CPFLOAT_MIN));
 		
-		struct ClosestPoints points = {pa, pb, n2, d2, id};
+		struct ClosestPoints points;
+		points.a = pa;
+		points.b = pb;
+		points.n = n2;
+		points.d = d2;
+		points.id = id;
 		return points;
 	}
 }
@@ -339,7 +384,10 @@ static struct ClosestPoints
 EPA(const struct SupportContext *ctx, const struct MinkowskiPoint v0, const struct MinkowskiPoint v1, const struct MinkowskiPoint v2)
 {
 	// TODO: allocate a NxM array here and do an in place convex hull reduction in EPARecurse?
-	struct MinkowskiPoint hull[3] = {v0, v1, v2};
+	struct MinkowskiPoint hull[3];
+	hull[0] = v0;
+	hull[1] = v1;
+	hull[2] = v2;
 	return EPARecurse(ctx, 3, hull, 1);
 }
 
@@ -572,7 +620,7 @@ CircleToSegment(const cpCircleShape *circle, const cpSegmentShape *segment, stru
 static void
 SegmentToSegment(const cpSegmentShape *seg1, const cpSegmentShape *seg2, struct cpCollisionInfo *info)
 {
-	struct SupportContext context = {(cpShape *)seg1, (cpShape *)seg2, (SupportPointFunc)SegmentSupportPoint, (SupportPointFunc)SegmentSupportPoint};
+	struct SupportContext context = MakeSupportContext((cpShape *)seg1, (cpShape *)seg2, (SupportPointFunc)SegmentSupportPoint, (SupportPointFunc)SegmentSupportPoint);
 	struct ClosestPoints points = GJK(&context, &info->id);
 	
 #if DRAW_CLOSEST
@@ -607,7 +655,7 @@ SegmentToSegment(const cpSegmentShape *seg1, const cpSegmentShape *seg2, struct 
 static void
 PolyToPoly(const cpPolyShape *poly1, const cpPolyShape *poly2, struct cpCollisionInfo *info)
 {
-	struct SupportContext context = {(cpShape *)poly1, (cpShape *)poly2, (SupportPointFunc)PolySupportPoint, (SupportPointFunc)PolySupportPoint};
+	struct SupportContext context = MakeSupportContext((cpShape *)poly1, (cpShape *)poly2, (SupportPointFunc)PolySupportPoint, (SupportPointFunc)PolySupportPoint);
 	struct ClosestPoints points = GJK(&context, &info->id);
 	
 #if DRAW_CLOSEST
@@ -630,7 +678,7 @@ PolyToPoly(const cpPolyShape *poly1, const cpPolyShape *poly2, struct cpCollisio
 static void
 SegmentToPoly(const cpSegmentShape *seg, const cpPolyShape *poly, struct cpCollisionInfo *info)
 {
-	struct SupportContext context = {(cpShape *)seg, (cpShape *)poly, (SupportPointFunc)SegmentSupportPoint, (SupportPointFunc)PolySupportPoint};
+	struct SupportContext context = MakeSupportContext((cpShape *)seg, (cpShape *)poly, (SupportPointFunc)SegmentSupportPoint, (SupportPointFunc)PolySupportPoint);
 	struct ClosestPoints points = GJK(&context, &info->id);
 	
 #if DRAW_CLOSEST
@@ -662,7 +710,7 @@ SegmentToPoly(const cpSegmentShape *seg, const cpPolyShape *poly, struct cpColli
 static void
 CircleToPoly(const cpCircleShape *circle, const cpPolyShape *poly, struct cpCollisionInfo *info)
 {
-	struct SupportContext context = {(cpShape *)circle, (cpShape *)poly, (SupportPointFunc)CircleSupportPoint, (SupportPointFunc)PolySupportPoint};
+	struct SupportContext context = MakeSupportContext((cpShape *)circle, (cpShape *)poly, (SupportPointFunc)CircleSupportPoint, (SupportPointFunc)PolySupportPoint);
 	struct ClosestPoints points = GJK(&context, &info->id);
 	
 #if DRAW_CLOSEST
@@ -706,7 +754,13 @@ static const CollisionFunc *CollisionFuncs = BuiltinCollisionFuncs;
 struct cpCollisionInfo
 cpCollide(const cpShape *a, const cpShape *b, cpCollisionID id, struct cpContact *contacts)
 {
-	struct cpCollisionInfo info = {a, b, id, cpvzero, 0, contacts};
+	struct cpCollisionInfo info;
+	info.a = a;
+	info.b = b;
+	info.id = id;
+	info.n = cpvzero;
+	info.count = 0;
+	info.arr = contacts;
 	
 	// Make sure the shape types are in order.
 	if(a->klass->type > b->klass->type){

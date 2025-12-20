@@ -157,7 +157,7 @@ static inline cpBodyType _cpBodyGetType(const cpBody* body)
 static inline cpBool cpBodyCanContact(const cpBody* bodyA, const cpBody* bodyB)
 {
 		return (bodyA->category & bodyB->contactMask) != 0 ||
-		       (bodyB->category & bodyA->contactMask) != 0;
+			   (bodyB->category & bodyA->contactMask) != 0;
 }
 
 static inline cpBool cpBodyCanCollide(const cpBody* bodyA, const cpBody* bodyB)
@@ -169,7 +169,7 @@ static inline cpBool
 cpBodyFilterReject(const cpBody* a, const cpBody* b)
 {
 	return !cpBodyCanCollide(a, b) && 
-	       !cpBodyCanContact(a, b);
+		   !cpBodyCanContact(a, b);
 }
 
 static inline cpBool
@@ -324,7 +324,10 @@ static inline void
 cpSpaceUncacheArbiter(cpSpace *space, cpArbiter *arb)
 {
 	const cpShape *a = arb->a, *b = arb->b;
-	const cpShape *shape_pair[] = {a, b};
+	const cpShape *shape_pair[2];
+	shape_pair[0] = a;
+	shape_pair[1] = b;
+
 	cpHashValue arbHashID = CP_HASH_PAIR((cpHashValue)a, (cpHashValue)b);
 	cpHashSetRemove(space->cachedArbiters, arbHashID, shape_pair);
 	cpArrayDeleteObj(space->arbiters, arb);

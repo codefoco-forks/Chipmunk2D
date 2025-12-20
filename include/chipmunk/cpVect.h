@@ -34,7 +34,9 @@ static const cpVect cpvzero = {0.0f,0.0f};
 /// Convenience constructor for cpVect structs.
 static inline cpVect cpv(const cpFloat x, const cpFloat y)
 {
-	cpVect v = {x, y};
+	cpVect v;
+	v.x = x;
+	v.y = y;
 	return v;
 }
 
@@ -215,7 +217,11 @@ static inline cpBool cpvnear(const cpVect v1, const cpVect v2, const cpFloat dis
 static inline cpMat2x2
 cpMat2x2New(cpFloat a, cpFloat b, cpFloat c, cpFloat d)
 {
-	cpMat2x2 m = {a, b, c, d};
+	cpMat2x2 m;
+	m.a = a;
+	m.b = b;
+	m.c = c;
+	m.d = d;
 	return m;
 }
 

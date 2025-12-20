@@ -345,7 +345,9 @@ cpArbiterInit(cpArbiter *arb, cpShape *a, cpShape *b)
 static inline cpCollisionHandler *
 cpSpaceLookupHandler(cpSpace *space, cpCollisionType a, cpCollisionType b, cpCollisionHandler *defaultValue)
 {
-	cpCollisionType types[] = {a, b};
+	cpCollisionType types[2];
+	types[0] = a;
+	types[1] = b;
 	cpCollisionHandler *handler = (cpCollisionHandler *)cpHashSetFind(space->collisionHandlers, CP_HASH_PAIR(a, b), types);
 	return (handler ? handler : defaultValue);
 }

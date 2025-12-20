@@ -206,7 +206,12 @@ cpShapeUpdate(cpShape *shape, cpTransform transform)
 cpFloat
 cpShapePointQuery(const cpShape *shape, cpVect p, cpPointQueryInfo *info)
 {
-	cpPointQueryInfo blank = {NULL, cpvzero, INFINITY, cpvzero};
+	cpPointQueryInfo blank;
+	blank.shape = NULL;
+	blank.point = cpvzero;
+	blank.distance = INFINITY;
+	blank.gradient = cpvzero;
+
 	if(info){
 		(*info) = blank;
 	} else {
@@ -220,7 +225,7 @@ cpShapePointQuery(const cpShape *shape, cpVect p, cpPointQueryInfo *info)
 
 cpBool
 cpShapeSegmentQuery(const cpShape *shape, cpVect a, cpVect b, cpFloat radius, cpSegmentQueryInfo *info){
-	cpSegmentQueryInfo blank = {NULL, b, cpvzero, 1.0f};
+	cpSegmentQueryInfo blank = MakeSegmentQueryInfo(NULL, b, cpvzero, 1.0f);
 	if(info){
 		(*info) = blank;
 	} else {
@@ -304,11 +309,11 @@ cpCircleShapeSegmentQuery(cpCircleShape *circle, cpVect a, cpVect b, cpFloat rad
 static struct cpShapeMassInfo
 cpCircleShapeMassInfo(cpFloat mass, cpFloat radius, cpVect center)
 {
-	struct cpShapeMassInfo info = {
+	struct cpShapeMassInfo info = MakeShapeMassInfo(
 		mass, cpMomentForCircle(1.0f, 0.0f, radius, cpvzero),
 		center,
-		cpAreaForCircle(0.0f, radius),
-	};
+		cpAreaForCircle(0.0f, radius)
+	);
 	
 	return info;
 }
@@ -435,8 +440,8 @@ cpSegmentShapeSegmentQuery(cpSegmentShape *seg, cpVect a, cpVect b, cpFloat r2, 
 			info->alpha = t;
 		}
 	} else if(r != 0.0f){
-		cpSegmentQueryInfo info1 = {NULL, b, cpvzero, 1.0f};
-		cpSegmentQueryInfo info2 = {NULL, b, cpvzero, 1.0f};
+		cpSegmentQueryInfo info1 = MakeSegmentQueryInfo(NULL, b, cpvzero, 1.0f);
+		cpSegmentQueryInfo info2 = MakeSegmentQueryInfo(NULL, b, cpvzero, 1.0f);
 		CircleSegmentQuery((cpShape *)seg, seg->ta, seg->r, a, b, r2, &info1);
 		CircleSegmentQuery((cpShape *)seg, seg->tb, seg->r, a, b, r2, &info2);
 		
@@ -451,11 +456,11 @@ cpSegmentShapeSegmentQuery(cpSegmentShape *seg, cpVect a, cpVect b, cpFloat r2, 
 static struct cpShapeMassInfo
 cpSegmentShapeMassInfo(cpFloat mass, cpVect a, cpVect b, cpFloat r)
 {
-	struct cpShapeMassInfo info = {
+	struct cpShapeMassInfo info = MakeShapeMassInfo(
 		mass, cpMomentForBox(1.0f, cpvdist(a, b) + 2.0f*r, 2.0f*r), // TODO is an approximation.
 		cpvlerp(a, b, 0.5f),
-		cpAreaForSegment(a, b, r),
-	};
+		cpAreaForSegment(a, b, r)
+	);
 	
 	return info;
 }

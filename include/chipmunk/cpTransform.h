@@ -36,7 +36,13 @@ static const cpTransform cpTransformIdentity = {1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.
 static inline cpTransform
 cpTransformNew(cpFloat a, cpFloat b, cpFloat c, cpFloat d, cpFloat tx, cpFloat ty)
 {
-	cpTransform t = {a, b, c, d, tx, ty};
+	cpTransform t;
+	t.a = a;
+	t.b = b;
+	t.c = c;
+	t.d = d;
+	t.tx = tx;
+	t.ty = ty;
 	return t;
 }
 
@@ -44,7 +50,13 @@ cpTransformNew(cpFloat a, cpFloat b, cpFloat c, cpFloat d, cpFloat tx, cpFloat t
 static inline cpTransform
 cpTransformNewTranspose(cpFloat a, cpFloat c, cpFloat tx, cpFloat b, cpFloat d, cpFloat ty)
 {
-	cpTransform t = {a, b, c, d, tx, ty};
+		cpTransform t;
+		t.a = a;
+		t.b = b;
+		t.c = c;
+		t.d = d;
+		t.tx = tx;
+		t.ty = ty;
 	return t;
 }
 
@@ -52,35 +64,35 @@ cpTransformNewTranspose(cpFloat a, cpFloat c, cpFloat tx, cpFloat b, cpFloat d, 
 static inline cpTransform
 cpTransformInverse(cpTransform t)
 {
-  cpFloat inv_det = 1.0/(t.a*t.d - t.c*t.b);
-  return cpTransformNewTranspose(
-     t.d*inv_det, -t.c*inv_det, (t.c*t.ty - t.tx*t.d)*inv_det,
-    -t.b*inv_det,  t.a*inv_det, (t.tx*t.b - t.a*t.ty)*inv_det
-  );
+	cpFloat inv_det = 1.0/(t.a*t.d - t.c*t.b);
+	return cpTransformNewTranspose(
+		 t.d*inv_det, -t.c*inv_det, (t.c*t.ty - t.tx*t.d)*inv_det,
+		-t.b*inv_det,  t.a*inv_det, (t.tx*t.b - t.a*t.ty)*inv_det
+	);
 }
 
 /// Multiply two transformation matrices.
 static inline cpTransform
 cpTransformMult(cpTransform t1, cpTransform t2)
 {
-  return cpTransformNewTranspose(
-    t1.a*t2.a + t1.c*t2.b, t1.a*t2.c + t1.c*t2.d, t1.a*t2.tx + t1.c*t2.ty + t1.tx,
-    t1.b*t2.a + t1.d*t2.b, t1.b*t2.c + t1.d*t2.d, t1.b*t2.tx + t1.d*t2.ty + t1.ty
-  );
+	return cpTransformNewTranspose(
+		t1.a*t2.a + t1.c*t2.b, t1.a*t2.c + t1.c*t2.d, t1.a*t2.tx + t1.c*t2.ty + t1.tx,
+		t1.b*t2.a + t1.d*t2.b, t1.b*t2.c + t1.d*t2.d, t1.b*t2.tx + t1.d*t2.ty + t1.ty
+	);
 }
 
 /// Transform an absolute point. (i.e. a vertex)
 static inline cpVect
 cpTransformPoint(cpTransform t, cpVect p)
 {
-  return cpv(t.a*p.x + t.c*p.y + t.tx, t.b*p.x + t.d*p.y + t.ty);
+	return cpv(t.a*p.x + t.c*p.y + t.tx, t.b*p.x + t.d*p.y + t.ty);
 }
 
 /// Transform a vector (i.e. a normal)
 static inline cpVect
 cpTransformVect(cpTransform t, cpVect v)
 {
-  return cpv(t.a*v.x + t.c*v.y, t.b*v.x + t.d*v.y);
+	return cpv(t.a*v.x + t.c*v.y, t.b*v.x + t.d*v.y);
 }
 
 /// Transform a cpBB.
@@ -101,10 +113,10 @@ cpTransformbBB(cpTransform t, cpBB bb)
 static inline cpTransform
 cpTransformTranslate(cpVect translate)
 {
-  return cpTransformNewTranspose(
-    1.0, 0.0, translate.x,
-    0.0, 1.0, translate.y
-  );
+	return cpTransformNewTranspose(
+		1.0, 0.0, translate.x,
+		0.0, 1.0, translate.y
+	);
 }
 
 /// Create a scale matrix.
@@ -113,7 +125,7 @@ cpTransformScale(cpFloat scaleX, cpFloat scaleY)
 {
 	return cpTransformNewTranspose(
 		scaleX,    0.0, 0.0,
-		   0.0, scaleY, 0.0
+			 0.0, scaleY, 0.0
 	);
 }
 
@@ -143,10 +155,10 @@ cpTransformRigid(cpVect translate, cpFloat radians)
 static inline cpTransform
 cpTransformRigidInverse(cpTransform t)
 {
-  return cpTransformNewTranspose(
-     t.d, -t.c, (t.c*t.ty - t.tx*t.d),
-    -t.b,  t.a, (t.tx*t.b - t.a*t.ty)
-  );
+	return cpTransformNewTranspose(
+		 t.d, -t.c, (t.c*t.ty - t.tx*t.d),
+		-t.b,  t.a, (t.tx*t.b - t.a*t.ty)
+	);
 }
 
 //MARK: Miscellaneous (but useful) transformation matrices.
@@ -155,44 +167,44 @@ cpTransformRigidInverse(cpTransform t)
 static inline cpTransform
 cpTransformWrap(cpTransform outer, cpTransform inner)
 {
-  return cpTransformMult(cpTransformInverse(outer), cpTransformMult(inner, outer));
+	return cpTransformMult(cpTransformInverse(outer), cpTransformMult(inner, outer));
 }
 
 static inline cpTransform
 cpTransformWrapInverse(cpTransform outer, cpTransform inner)
 {
-  return cpTransformMult(outer, cpTransformMult(inner, cpTransformInverse(outer)));
+	return cpTransformMult(outer, cpTransformMult(inner, cpTransformInverse(outer)));
 }
 
 static inline cpTransform
 cpTransformOrtho(cpBB bb)
 {
-  return cpTransformNewTranspose(
-    2.0/(bb.r - bb.l), 0.0, -(bb.r + bb.l)/(bb.r - bb.l),
-    0.0, 2.0/(bb.t - bb.b), -(bb.t + bb.b)/(bb.t - bb.b)
-  );
+	return cpTransformNewTranspose(
+		2.0/(bb.r - bb.l), 0.0, -(bb.r + bb.l)/(bb.r - bb.l),
+		0.0, 2.0/(bb.t - bb.b), -(bb.t + bb.b)/(bb.t - bb.b)
+	);
 }
 
 static inline cpTransform
 cpTransformBoneScale(cpVect v0, cpVect v1)
 {
-  cpVect d = cpvsub(v1, v0); 
-  return cpTransformNewTranspose(
-    d.x, -d.y, v0.x,
-    d.y,  d.x, v0.y
-  );
+	cpVect d = cpvsub(v1, v0); 
+	return cpTransformNewTranspose(
+		d.x, -d.y, v0.x,
+		d.y,  d.x, v0.y
+	);
 }
 
 static inline cpTransform
 cpTransformAxialScale(cpVect axis, cpVect pivot, cpFloat scale)
 {
-  cpFloat A = axis.x*axis.y*(scale - 1.0);
-  cpFloat B = cpvdot(axis, pivot)*(1.0 - scale);
-  
-  return cpTransformNewTranspose(
-    scale*axis.x*axis.x + axis.y*axis.y, A, axis.x*B,
-    A, axis.x*axis.x + scale*axis.y*axis.y, axis.y*B
-  );
+	cpFloat A = axis.x*axis.y*(scale - 1.0);
+	cpFloat B = cpvdot(axis, pivot)*(1.0 - scale);
+	
+	return cpTransformNewTranspose(
+		scale*axis.x*axis.x + axis.y*axis.y, A, axis.x*B,
+		A, axis.x*axis.x + scale*axis.y*axis.y, axis.y*B
+	);
 }
 
 #endif

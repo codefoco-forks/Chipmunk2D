@@ -137,7 +137,7 @@ cpPolyShapeSegmentQuery(cpPolyShape *poly, cpVect a, cpVect b, cpFloat r2, cpSeg
 	// Also check against the beveled vertexes.
 	if(rsum > 0.0f){
 		for(int i=0; i<count; i++){
-			cpSegmentQueryInfo circle_info = {NULL, b, cpvzero, 1.0f};
+			cpSegmentQueryInfo circle_info = MakeSegmentQueryInfo(NULL, b, cpvzero, 1.0f);
 			CircleSegmentQuery(&poly->shape, planes[i].v0, r, a, b, r2, &circle_info);
 			if(circle_info.alpha < info->alpha) (*info) = circle_info;
 		}
@@ -170,11 +170,11 @@ cpPolyShapeMassInfo(cpFloat mass, int count, const cpVect *verts, cpFloat radius
 	// TODO moment is approximate due to radius.
 	
 	cpVect centroid = cpCentroidForPoly(count, verts);
-	struct cpShapeMassInfo info = {
+	struct cpShapeMassInfo info = MakeShapeMassInfo(
 		mass, cpMomentForPoly(1.0f, count, verts, cpvneg(centroid), radius),
 		centroid,
-		cpAreaForPoly(count, verts, radius),
-	};
+		cpAreaForPoly(count, verts, radius)
+	);
 	
 	return info;
 }
@@ -234,12 +234,11 @@ cpBoxShapeInit(cpPolyShape *poly, cpBody *body, cpFloat width, cpFloat height, c
 cpPolyShape *
 cpBoxShapeInit2(cpPolyShape *poly, cpBody *body, cpBB box, cpFloat radius)
 {
-	cpVect verts[4] = {
-		cpv(box.r, box.b),
-		cpv(box.r, box.t),
-		cpv(box.l, box.t),
-		cpv(box.l, box.b),
-	};
+	cpVect verts[4];
+	verts[0] = cpv(box.r, box.b);
+	verts[1] = cpv(box.r, box.t);
+	verts[2] = cpv(box.l, box.t);
+	verts[3] = cpv(box.l, box.b);
 	
 	return cpPolyShapeInitRaw(poly, body, 4, verts, radius);
 }

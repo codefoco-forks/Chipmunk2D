@@ -250,7 +250,10 @@ cpSpaceCollideShapes(cpShape *a, cpShape *b, cpCollisionID id, cpSpace *space)
 	
 	// Get an arbiter from space->arbiterSet for the two shapes.
 	// This is where the persistant contact magic comes from.
-	const cpShape *shape_pair[] = {info.a, info.b};
+	const cpShape *shape_pair[2];
+	shape_pair[0] = info.a;
+	shape_pair[1] = info.b;
+
 	cpHashValue arbHashID = CP_HASH_PAIR((cpHashValue)info.a, (cpHashValue)info.b);
 	cpArbiter *arb = (cpArbiter *)cpHashSetInsert(space->cachedArbiters, arbHashID, shape_pair, (cpHashSetTransFunc)cpSpaceArbiterSetTrans, space);
 	cpArbiterUpdate(arb, &info, space);

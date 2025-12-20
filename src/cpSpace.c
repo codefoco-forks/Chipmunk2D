@@ -428,7 +428,7 @@ cpCollisionHandler *cpSpaceAddDefaultCollisionHandler(cpSpace *space)
 cpCollisionHandler *cpSpaceAddCollisionHandler(cpSpace *space, cpCollisionType a, cpCollisionType b)
 {
 	cpHashValue hash = CP_HASH_PAIR(a, b);
-	cpCollisionHandler handler = {a, b, DefaultBegin, DefaultPreSolve, DefaultPostSolve, DefaultSeparate, NULL};
+	cpCollisionHandler handler = MakeCollisionHandler(a, b, DefaultBegin, DefaultPreSolve, DefaultPostSolve, DefaultSeparate, NULL);
 	return (cpCollisionHandler*)cpHashSetInsert(space->collisionHandlers, hash, &handler, (cpHashSetTransFunc)handlerSetTrans, NULL);
 }
 
@@ -438,7 +438,7 @@ cpSpaceAddWildcardHandler(cpSpace *space, cpCollisionType type)
 	cpSpaceUseWildcardDefaultHandler(space);
 	cpCollisionType collision = CP_WILDCARD_COLLISION_TYPE;
 	cpHashValue hash = CP_HASH_PAIR(type, collision);
-	cpCollisionHandler handler = {type, CP_WILDCARD_COLLISION_TYPE, DoNothing, AlwaysCollide, DoNothing, DoNothing, NULL};
+	cpCollisionHandler handler = MakeCollisionHandler(type, CP_WILDCARD_COLLISION_TYPE, DoNothing, AlwaysCollide, DoNothing, DoNothing, NULL);
 	return (cpCollisionHandler*)cpHashSetInsert(space->collisionHandlers, hash, &handler, (cpHashSetTransFunc)handlerSetTrans, NULL);
 }
 
@@ -543,7 +543,10 @@ void
 cpSpaceFilterArbiters(cpSpace *space, cpBody *body, cpShape *filter)
 {
 	cpSpaceLock(space); {
-		struct arbiterFilterContext context = {space, body, filter};
+		struct arbiterFilterContext context;
+		context.space = space;
+		context.body = body;
+		context.shape = filter;
 		cpHashSetFilter(space->cachedArbiters, (cpHashSetFilterFunc)cachedArbitersFilter, &context);
 	} cpSpaceUnlock(space, cpTrue);
 }
@@ -727,7 +730,10 @@ void
 cpSpaceEachShape(cpSpace *space, cpSpaceShapeIteratorFunc func, void *data)
 {
 	cpSpaceLock(space); {
-		spaceShapeContext context = {func, data};
+		spaceShapeContext context;
+		context.func = func;
+		context.data = data;
+
 		cpSpatialIndexEach(space->dynamicShapes, (cpSpatialIndexIteratorFunc)spaceEachShapeIterator, &context);
 		cpSpatialIndexEach(space->staticShapes, (cpSpatialIndexIteratorFunc)spaceEachShapeIterator, &context);
 	} cpSpaceUnlock(space, cpTrue);

@@ -34,6 +34,14 @@ typedef struct TableCell {
 	Bounds bounds;
 } TableCell;
 
+static inline TableCell MakeTableCell2(void * obj, Bounds bounds)
+{
+	TableCell cell;
+	cell.obj = obj;
+	cell.bounds = bounds;
+	return cell;
+}
+
 struct cpSweep1D
 {
 	cpSpatialIndex spatialIndex;
@@ -52,14 +60,16 @@ BoundsOverlap(Bounds a, Bounds b)
 static inline Bounds
 BBToBounds(cpBB bb)
 {
-	Bounds bounds = {bb.l, bb.r};
+	Bounds bounds;
+	bounds.min = bb.l;
+	bounds.max = bb.r;
 	return bounds;
 }
 
 static inline TableCell
 MakeTableCell(cpSweep1D *sweep, void *obj)
 {
-	TableCell cell = {obj, BBToBounds(sweep->spatialIndex.bbfunc(obj))};
+	TableCell cell = MakeTableCell2(obj, BBToBounds(sweep->spatialIndex.bbfunc(obj)));
 	return cell;
 }
 

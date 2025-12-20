@@ -327,7 +327,9 @@ static void eachHelper(cpHandle *hand, eachContext *context){context->func(hand-
 static void
 cpSpaceHashEach(cpSpaceHash *hash, cpSpatialIndexIteratorFunc func, void *data)
 {
-	eachContext context = {func, data};
+	eachContext context;
+	context.func = func;
+	context.data = data;
 	cpHashSetEach(hash->handleSet, (cpHashSetIteratorFunc)eachHelper, &context);
 }
 
@@ -454,7 +456,11 @@ cpSpaceHashReindexQuery(cpSpaceHash *hash, cpSpatialIndexQueryFunc func, void *d
 {
 	clearTable(hash);
 	
-	queryRehashContext context = {hash, func, data};
+	queryRehashContext context;
+	context.hash = hash;
+	context.func = func;
+	context.data = data;
+
 	cpHashSetEach(hash->handleSet, (cpHashSetIteratorFunc)queryRehash_helper, &context);
 	
 	cpSpatialIndexCollideStatic((cpSpatialIndex *)hash, hash->spatialIndex.staticIndex, func, data);

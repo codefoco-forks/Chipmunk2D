@@ -155,6 +155,19 @@ struct cpShapeMassInfo {
 	cpFloat area;
 };
 
+inline struct cpShapeMassInfo MakeShapeMassInfo(cpFloat m,
+cpFloat i,
+cpVect cog,
+cpFloat area)
+{
+	struct cpShapeMassInfo info;
+	info.m = m;
+	info.i = i;
+	info.cog = cog;
+	info.area = area;
+	return info;
+}
+
 typedef enum cpShapeType{
 	CP_CIRCLE_SHAPE,
 	CP_SEGMENT_SHAPE,

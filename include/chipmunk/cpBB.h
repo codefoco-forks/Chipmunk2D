@@ -37,7 +37,11 @@ typedef struct cpBB{
 /// Convenience constructor for cpBB structs.
 static inline cpBB cpBBNew(const cpFloat l, const cpFloat b, const cpFloat r, const cpFloat t)
 {
-	cpBB bb = {l, b, r, t};
+	cpBB bb;
+	bb.l = l;
+	bb.b = b;
+	bb.r = r;
+	bb.t = t;
 	return bb;
 }
 
